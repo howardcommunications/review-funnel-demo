@@ -1,0 +1,13 @@
+{
+  "name": "review-funnel-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Howard Communications Review Funnel - live test demo (mock mode)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
