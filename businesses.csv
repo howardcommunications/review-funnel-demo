@@ -1,4 +1,4 @@
 business_name,twilio_number,owner_mobile,timezone,google_review_link,page_token,send_delay_minutes,monthly_request_cap,send_window_start,send_window_end,reminder_delay_hours,request_message,reminder_message,feedback_heading,feedback_thanks_message,feedback_subline,active,api_secret
 Fresh Cuts Barbershop (Sample),+14045550201,+14045550202,America/New_York,https://g.page/r/SAMPLE-FreshCutsBarbershop/review,tQybQFofMi5KcVDHzB1hOZWPZ,15,500,08:00,20:00,72,,,,,,true,t1NFFFRQiKE7CqqyyyBSVwG6yc_-aftD
 Summit Plumbing & HVAC (Sample),+13125550203,+13125550204,America/Chicago,https://g.page/r/SAMPLE-SummitPlumbingHVAC/review,tfsS2bp1hKA-_BWLiXt2GJFfH,15,500,08:00,20:00,72,,,,,,true,W-nLiOsTeTRdyFL66yFEShE83iFUW6jH
-Howard Communications,+16785550137,+16786971019,America/New_York,https://g.page/r/PLACEHOLDER-HowardCommunications/review,V6hvww1Z9Zz5k10GB1NvDUGIvcl0FoUB,15,500,08:00,20:00,72,,,,,,true,h6SSy6-puQh6mb5zf_nKbj7qZesdUX1mUXs2aJP8a3A
+Howard Communications,+16785550137,+16786971019,America/New_York,/demo/google-review,V6hvww1Z9Zz5k10GB1NvDUGIvcl0FoUB,15,500,08:00,20:00,72,,,,,,true,h6SSy6-puQh6mb5zf_nKbj7qZesdUX1mUXs2aJP8a3A

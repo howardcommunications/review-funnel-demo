@@ -428,6 +428,60 @@ const server = http.createServer(async (req, res) => {
       );
     }
 
+    // DEMO-ONLY switchboard. One page listing every business in this
+    // demo instance with its three live doors — customer page, owner
+    // inbox, staff page — so Isaac can flip from the seller view to
+    // standing in a customer's (or owner's) shoes mid-demo, on the
+    // shop's real pages. Demo copies only; not part of the sellable
+    // build.
+    if (req.method === 'GET' && url.pathname === '/demo') {
+      const cards = businesses.map((b) =>
+        '<div style="border:1px solid #bbb; border-radius:8px; padding:1em; margin:1em 0;">' +
+        '<h2 style="color:#111; margin-top:0;">' + esc(b.name) + '</h2>' +
+        '<p><a href="/b/' + esc(b.pageToken) + '/feedback" style="display:block; text-align:center; padding:0.8em; background:#1a73e8; color:#ffffff; border-radius:8px; text-decoration:none;">Customer view — the page their customers see</a></p>' +
+        '<p><a href="/inbox/' + esc(b.pageToken) + '" style="display:block; text-align:center; padding:0.8em; background:#188038; color:#ffffff; border-radius:8px; text-decoration:none;">Owner view — their private inbox</a></p>' +
+        '<p><a href="/staff/' + esc(b.pageToken) + '" style="display:block; text-align:center; padding:0.8em; background:#5f6368; color:#ffffff; border-radius:8px; text-decoration:none;">Staff view — the send page</a></p>' +
+        '</div>'
+      ).join('');
+      return sendHtml(res, 200, pageShell('Review Funnel — demo switchboard', (
+        '<h1 style="color:#111;">Demo switchboard</h1>' +
+        '<p style="color:#444;">Pick a shop, then stand where you want: the customer, the owner, or the staff. Every button opens that shop\'s real page in this demo.</p>' +
+        cards
+      )));
+    }
+
+    // DEMO-ONLY dead end for the Google review door. Howard
+    // Communications' own Google profile is still in Google's review
+    // queue, so for Isaac's hands-on test run his row's review link
+    // points here: he can tap the Google door, pick stars, write the
+    // review and press post — and the review is posted NOWHERE. This
+    // page never pretends to be Google; in the live product this tap
+    // opens the shop's real Google review page. Demo copies only —
+    // this route is not part of the sellable build.
+    if (req.method === 'GET' && url.pathname === '/demo/google-review') {
+      return sendHtml(res, 200, pageShell('Demo stop — Google review', (
+        '<h1 style="color:#111;">Demo stop</h1>' +
+        '<p style="color:#111;">In the live product, this tap opens the shop\'s real Google review page. ' +
+        'This is the demo, so your test review is posted <strong>nowhere</strong> — go through the motions:</p>' +
+        '<form method="POST" action="/demo/google-review/posted">' +
+        '<p><span style="color:#111;">Your rating</span><br>' +
+        [1, 2, 3, 4, 5].map((n) =>
+          '<label style="color:#111; margin-right:0.6em;"><input type="radio" name="rating" value="' + n + '"' + (n === 5 ? ' checked' : '') + '> ' + n + ' star' + (n > 1 ? 's' : '') + '</label>'
+        ).join('') + '</p>' +
+        '<p><label style="color:#111;">Your review<br>' +
+        '<textarea name="review" rows="4" style="width:100%; padding:0.5em;"></textarea></label></p>' +
+        '<p><button type="submit" style="width:100%; padding:1em; font-size:1.1em; background:#1a73e8; color:#ffffff; border:none; border-radius:8px;">Post review</button></p>' +
+        '</form>'
+      )));
+    }
+    if (req.method === 'POST' && url.pathname === '/demo/google-review/posted') {
+      return sendHtml(res, 200, pageShell('Posted — into nowhere', (
+        '<h1 style="color:#111;">Posted — into nowhere</h1>' +
+        '<p style="color:#111;">That\'s the whole trip. Your test review was saved nowhere, sent nowhere, and seen by no one — exactly what a test should do.</p>' +
+        '<p style="color:#444;">In the live product, that same tap and post happen on the shop\'s real Google page, and the review counts for real.</p>'
+      )));
+    }
+
     // Feedback form (Google review door shown above it). GET /r/:token
     // is kept as an alias of the form.
     if (parts[0] === 'r' && parts[1]) {
